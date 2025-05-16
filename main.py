@@ -1,14 +1,14 @@
-import os, inspect
+import os
+import cv2
+import inspect
+import demo_policies as demo
+from kuka_diverse_object_gym_env import KukaDiverseObjectEnv
+
+
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(os.path.dirname(currentdir))
 os.sys.path.insert(0,parentdir)
-import gym
-import numpy as np
-import pdb
-import cv2
-from kuka_diverse_object_gym_env import KukaDiverseObjectEnv
-
-import demo_policies as demo
 
 save_path = './data/train_image/'
 def main():

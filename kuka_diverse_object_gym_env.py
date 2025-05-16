@@ -1,21 +1,21 @@
-from pybullet_envs.bullet.kukaGymEnv import KukaGymEnv
-import random
 import os
-from gym import spaces
+import sys
 import time
-import pybullet as p
 import kuka
+import glob
+import uuid
+import random
 import numpy as np
 import pybullet_data
-import pdb
-import distutils.dir_util
-import glob
-import gym
+import pybullet as p
+from gymnasium import spaces
 import perlin_noise as noise
-import uuid
-import sys
+
+from pybullet_envs.bullet.kukaGymEnv import KukaGymEnv
 
 tmp_dir = os.path.dirname(sys.modules['__main__'].__file__) + "/tmp"
+
+
 class KukaDiverseObjectEnv(KukaGymEnv):
   """Class for Kuka environment with diverse objects.
 
@@ -94,7 +94,7 @@ class KukaDiverseObjectEnv(KukaGymEnv):
       p.resetDebugVisualizerCamera(1.5,200,-40,[0.52,-0.2,-0.33])
     else:
       self.cid = p.connect(p.DIRECT)
-    self._seed()
+    self.seed()
 
     if (self._isDiscrete):
       if self._removeHeightHack:

@@ -1,0 +1,16 @@
+[project]
+name = "kuka-pybullet-for-pick-and-place"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gym==0.25.0",
+    "gymnasium[classic-control]>=1.1.1",
+    "mpi4py>=4.0.3",
+    "numpy>=2.2.5",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.2.1",
+    "pybullet>=3.2.7",
+    "setuptools>=80.7.1",
+]

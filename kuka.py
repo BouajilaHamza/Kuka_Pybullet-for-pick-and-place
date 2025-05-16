@@ -1,13 +1,12 @@
-import os,  inspect
+import os
+import math
+import inspect
+import pybullet as p
+import pybullet_data
+
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(os.path.dirname(currentdir))
 os.sys.path.insert(0,parentdir)
-
-import pybullet as p
-import numpy as np
-import copy
-import math
-import pybullet_data
 
 
 class Kuka:
@@ -36,11 +35,16 @@ class Kuka:
     self.rp=[0,0,0,0.5*math.pi,0,-math.pi*0.5*0.66,0]
     #joint damping coefficents
     self.jd=[0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001,0.00001]
+    # Connect to the physics server
+    p.connect(p.DIRECT)  # or p.DIRECT for non-visual simulation
+
+    # Set the additional search path for PyBullet data
+    p.setAdditionalSearchPath(self.urdfRootPath)
     self.reset()
 
   def reset(self):
-
-    objects = p.loadSDF(os.path.join(self.urdfRootPath,"kuka_iiwa/kuka_with_gripper3.sdf"))
+    print("kuka_iiwa/kuka_with_gripper.sdf")
+    objects = p.loadSDF("kuka_iiwa/kuka_with_gripper.sdf")
     self.kukaUid = objects[0]
     #for i in range (p.getNumJoints(self.kukaUid)):
     #  print(p.getJointInfo(self.kukaUid,i))
@@ -51,9 +55,9 @@ class Kuka:
       p.resetJointState(self.kukaUid,jointIndex,self.jointPositions[jointIndex])
       p.setJointMotorControl2(self.kukaUid,jointIndex,p.POSITION_CONTROL,targetPosition=self.jointPositions[jointIndex],force=self.maxForce)
 
-    self.trayUid = p.loadURDF(os.path.join(self.urdfRootPath,"tray/tray.urdf"), 0.60000,-0.1500,-0.190000,0.000000,0.000000,1.000000,0.000000)
+    self.trayUid = p.loadURDF("tray/tray.urdf", 0.60000,-0.1500,-0.190000,0.000000,0.000000,1.000000,0.000000)
 
-    self.trayUid2 = p.loadURDF(os.path.join(self.urdfRootPath,"tray/tray2.urdf"), 0.6000,0.4000,-0.190000,0.000000,0.000000,1.000000,0.000000)
+    self.trayUid2 = p.loadURDF("tray/tray_textured2.urdf", 0.6000,0.4000,-0.190000,0.000000,0.000000,1.000000,0.000000)
 
     self.endEffectorPos = [0.537,0.0,0.5]
     self.endEffectorAngle = 0

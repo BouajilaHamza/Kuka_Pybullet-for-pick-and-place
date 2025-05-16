@@ -1,7 +1,7 @@
 import random
 import math
-from PIL import Image
 import numpy as np
+from PIL import Image
 
 """
 Texture generation using Perlin noise. Heavily based on
