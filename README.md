@@ -53,5 +53,8 @@ It is highly recommended to use a virtual environment to manage project dependen
 Once the setup is complete and the virtual environment is activated, you can run the main simulation script:
 ```uv run python main.py```
 
-![image] (https://github.com/cb614611757/Kuka_Pybullet-for-pick-and-place/blob/master/data/train_image/pick_and_place.png)
+## Demonstration
+
+![KUKA Pick and Place Simulation](docs/imgs/pick_and_place.png)
+
  
